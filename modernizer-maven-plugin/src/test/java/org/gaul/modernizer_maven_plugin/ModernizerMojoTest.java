@@ -165,6 +165,22 @@ public final class ModernizerMojoTest {
     }
 
     @Test
+    public void emptyViolationsFileFallsBackToBundledRules()
+            throws Exception {
+        RunResult result = execute(null, "", null, "8", false);
+        assertViolations(result, BUNDLED_VECTOR_COMMENT,
+                BUNDLED_GET_BYTES_COMMENT);
+    }
+
+    @Test
+    public void emptyViolationsFileHonorsDisabledDefaults()
+            throws Exception {
+        RunResult result = execute(Boolean.FALSE, "", null, "8", false);
+        assertThat(result.failure).isNull();
+        assertThat(result.errors).isEmpty();
+    }
+
+    @Test
     public void customViolationsFileAppliesWhenDefaultsDisabled()
             throws Exception {
         Path rules = writeRules("custom.xml", CLOCK_NAME, "custom clock");

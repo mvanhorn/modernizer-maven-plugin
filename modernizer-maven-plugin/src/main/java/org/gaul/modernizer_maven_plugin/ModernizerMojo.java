@@ -110,7 +110,7 @@ public final class ModernizerMojo extends AbstractMojo {
 
     /**
      * Include the bundled {@code classpath:/modernizer.xml} rules when
-     * {@code violationsFile} is not configured. Set to {@code false} to
+     * {@code violationsFile} is not configured (null or empty). Set to {@code false} to
      * start from an empty rule set, for example from a parent POM, without
      * requiring an empty violations file. Explicit {@code violationsFile}
      * and {@code violationsFiles} values are still loaded. An explicit
@@ -260,7 +260,7 @@ public final class ModernizerMojo extends AbstractMojo {
         LogLevel logLevel = parseLogLevel(violationLogLevel);
 
         Map<String, Collection<Violation>> allViolations = new HashMap<>();
-        if (violationsFile != null) {
+        if (violationsFile != null && !violationsFile.isEmpty()) {
             allViolations.putAll(parseViolations(violationsFile));
         } else if (includeDefaultViolations) {
             allViolations.putAll(parseViolations(DEFAULT_VIOLATIONS_FILE));
