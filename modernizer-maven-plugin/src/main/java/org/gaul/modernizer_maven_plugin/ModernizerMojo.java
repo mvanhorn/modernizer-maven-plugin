@@ -262,11 +262,14 @@ public final class ModernizerMojo extends AbstractMojo {
 
         LogLevel logLevel = parseLogLevel(violationLogLevel);
 
-        Map<String, Collection<Violation>> allViolations = new HashMap<>();
+        // parseViolations returns a fresh mutable map, so use it as the base
+        Map<String, Collection<Violation>> allViolations;
         if (violationsFile != null && !violationsFile.isEmpty()) {
-            allViolations.putAll(parseViolations(violationsFile));
+            allViolations = parseViolations(violationsFile);
         } else if (includeDefaultViolations) {
-            allViolations.putAll(parseViolations(DEFAULT_VIOLATIONS_FILE));
+            allViolations = parseViolations(DEFAULT_VIOLATIONS_FILE);
+        } else {
+            allViolations = new HashMap<>();
         }
         for (String violationsFilePath : violationsFiles) {
             allViolations.putAll(parseViolations(violationsFilePath));
