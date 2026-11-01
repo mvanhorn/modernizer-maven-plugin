@@ -37,7 +37,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.apache.maven.project.MavenProject;
 import org.gaul.modernizer_maven_plugin.output.OutputFormat;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -58,10 +58,13 @@ public final class ModernizerMojoTest {
             "javaVersion is not set but is required for execution.";
 
     @TempDir
+    private static Path fixtureDir;
+
+    @TempDir
     private Path tempDir;
 
-    private Path sourceRoot;
-    private Path classesDir;
+    private static Path sourceRoot;
+    private static Path classesDir;
 
     @Test
     public void mapToSourceForPlainClass() {
@@ -103,10 +106,10 @@ public final class ModernizerMojoTest {
                         "com/example/package-info.java").toString());
     }
 
-    @BeforeEach
-    public void compileFixture() throws Exception {
-        sourceRoot = tempDir.resolve("src");
-        classesDir = tempDir.resolve("classes");
+    @BeforeAll
+    public static void compileFixture() throws Exception {
+        sourceRoot = fixtureDir.resolve("src");
+        classesDir = fixtureDir.resolve("classes");
         Path source = sourceRoot.resolve("fixture/LegacyUser.java");
         Files.createDirectories(source.getParent());
         Files.write(source, List.of(
