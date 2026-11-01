@@ -188,7 +188,9 @@ Child that keeps the inherited empty base and applies only its own file:
   <groupId>org.gaul</groupId>
   <artifactId>modernizer-maven-plugin</artifactId>
   <configuration>
-    <violationsFile>${project.basedir}/modernizer.xml</violationsFile>
+    <violationsFiles>
+      <violationsFile>${project.basedir}/modernizer.xml</violationsFile>
+    </violationsFiles>
   </configuration>
 </plugin>
 ```
