@@ -67,7 +67,7 @@ public final class ModernizerMojo extends AbstractMojo {
 
     private static final String CLASSPATH_PREFIX = "classpath:";
     private static final String DEFAULT_VIOLATIONS_FILE =
-            "classpath:/modernizer.xml";
+            CLASSPATH_PREFIX + "/modernizer.xml";
 
     /** The maven project (effective pom). */
     @Parameter(defaultValue = "${project}", readonly = true)
