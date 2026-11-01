@@ -152,7 +152,7 @@ Parent:
 <plugin>
   <groupId>org.gaul</groupId>
   <artifactId>modernizer-maven-plugin</artifactId>
-  <version>3.4.0</version>
+  <version>3.6.0</version>
   <configuration>
     <javaVersion>${maven.compiler.release}</javaVersion>
     <includeDefaultViolations>false</includeDefaultViolations>
