@@ -124,14 +124,17 @@ public final class ModernizerMojo extends AbstractMojo {
     private boolean includeDefaultViolations = true;
 
     /**
-     * User-specified violation file. Also disables standard violation checks.
-     * Optional: when omitted, the bundled rules are loaded only if
-     * {@code includeDefaultViolations} is true. Can point to files from
-     * classpath using an absolute path, e.g.:
+     * User-specified violation file. When set, it is the base rule set and
+     * replaces the bundled rules, whether or not
+     * {@code includeDefaultViolations} is true. When omitted, the base is
+     * the bundled rules if {@code includeDefaultViolations} is true, and
+     * empty otherwise. Entries in {@code violationsFiles} are then layered
+     * on top of that base. Can point to files from classpath using an
+     * absolute path, e.g.:
      *
      * classpath:/modernizer.xml
      *
-     * for the default violations file.
+     * for the bundled violations file.
      */
     @Parameter(property = "modernizer.violationsFile")
     private String violationsFile;
@@ -148,7 +151,7 @@ public final class ModernizerMojo extends AbstractMojo {
      *
      * classpath:/modernizer.xml
      *
-     * for the default violations file.
+     * for the bundled violations file.
      */
     @Parameter(property = "modernizer.violationsFiles")
     private List<String> violationsFiles = emptyList();

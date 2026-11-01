@@ -47,7 +47,7 @@ The `<configuration>` stanza can contain several elements:
 * `<failOnViolations>` fail phase if Modernizer detects any violations.  Defaults to true.
 * `<includeTestClasses>` run Modernizer on test classes.  Defaults to true.
 * `<includeDefaultViolations>` load the bundled `classpath:/modernizer.xml` rules when `<violationsFile>` is omitted.  Defaults to true.  Set to false for an empty base rule set; no violations file is required.  Explicit `<violationsFile>` and `<violationsFiles>` values are still applied.  See [Custom violations](#custom-violations) below.
-* `<violationsFile>` user-specified violation file.  Also disables standard violation checks.  See [Custom violations](#custom-violations) below.
+* `<violationsFile>` user-specified violation file.  When set, it is the base rule set and replaces the bundled rules, whether or not `<includeDefaultViolations>` is true.  When omitted, the base is the bundled rules if `<includeDefaultViolations>` is true, and empty otherwise.  `<violationsFiles>` entries are layered on top of the base.  See [Custom violations](#custom-violations) below.
 * `<violationsFiles>` user-specified violation files.  Later files override violations from earlier ones, including `<violationsFile>` and the default violations when those are the base.
 * `<exclusionsFile>` disables user-specified violations.  This is a text file with one exclusion per line in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.  Empty lines and lines starting with `#` are ignored.
 * `<exclusions>` violations to disable. Each exclusion should be in the javap format: `java/lang/String.getBytes:(Ljava/lang/String;)[B`.
